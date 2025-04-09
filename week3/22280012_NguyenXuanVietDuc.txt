@@ -1,0 +1,206 @@
+#Bai1:
+# a. 
+x <- c(1, 2, 5, 7, -3, 0, 5, 1, 5, 6)
+y <- c(2, 2, 0, -5, 7, 8, 11, 9, 3, 2)
+
+# a. 
+x_plus_y <- x + y
+x_times_y <- x * y
+x_minus_y <- x - y
+
+x_plus_y
+x_times_y
+x_minus_y
+
+# b. 
+z <- x[x %% 2 == 0]  
+t <- y[y %% 2 != 0] 
+
+z
+t
+
+# c.
+x_positive <- x[x > 0]
+y_positive <- y[y > 0]
+
+x_positive
+y_positive
+
+# d.
+mean_x <- mean(x)
+mean_y <- mean(y)
+
+sd_x <- sd(x)
+sd_y <- sd(y)
+
+se_x <- sd_x / sqrt(length(x))
+se_y <- sd_y / sqrt(length(y))
+
+cat("X - Mean:", mean_x, "SD:", sd_x, "SE:", se_x, "\n")
+cat("Y - Mean:", mean_y, "SD:", sd_y, "SE:", se_y, "\n")
+
+# e.
+max_x <- max(x)
+min_x <- min(x)
+max_y <- max(y)
+min_y <- min(y)
+
+cat("X - Max:", max_x, "Min:", min_x, "\n")
+cat("Y - Max:", max_y, "Min:", min_y, "\n")
+
+# f. 
+x_sorted <- sort(x)  
+y_sorted <- sort(y, decreasing = TRUE)
+
+x_sorted
+y_sorted
+
+# g. 
+save(x, y, file = "vectors.RData")
+
+
+#Bai 2:
+# a. 
+data1 <- read.csv("C:/Users/kkagi/Downloads/data01.csv")
+
+fpsa_mean <- mean(data1$FPSA, na.rm = TRUE)
+fpsa_var <- var(data1$FPSA, na.rm = TRUE)
+fpsa_median <- median(data1$FPSA, na.rm = TRUE)
+
+tpsa_mean <- mean(data1$TPSA, na.rm = TRUE)
+tpsa_var <- var(data1$TPSA, na.rm = TRUE)
+tpsa_median <- median(data1$TPSA, na.rm = TRUE)
+
+cat("FPSA - Mean:", fpsa_mean, "Variance:", fpsa_var, "Median:", fpsa_median, "\n")
+cat("TPSA - Mean:", tpsa_mean, "Variance:", tpsa_var, "Median:", tpsa_median, "\n")
+
+# b.
+
+plot(data1$FPSA, type = "l", col = "blue", xlab = "Index", ylab = "Value", main = "Line Plot of FPSA and TPSA")
+lines(data1$TPSA, col = "red")
+legend("topright", legend = c("FPSA", "TPSA"), col = c("blue", "red"), lty = 1)
+
+par(mfrow = c(1, 2)) 
+boxplot(data1$FPSA, main = "Boxplot of FPSA", col = "lightblue")
+boxplot(data1$TPSA, main = "Boxplot of TPSA", col = "lightgreen")
+par(mfrow = c(1, 1))
+
+# c. 
+fpsa_k0 <- data1$FPSA[data1$K == 0]
+fpsa_k1 <- data1$FPSA[data1$K == 1]
+
+cat("FPSA with K=0:", fpsa_k0, "\n")
+cat("FPSA with K=1:", fp ▋
+
+#Bai3:
+# a.
+set.seed(123) 
+binom_data <- rbinom(100, size = 60, prob = 0.4)
+
+hist(binom_data, breaks = 10, col = "lightblue", main = "Binomial Distribution (n=60, p=0.4)",
+     xlab = "Values", ylab = "Frequency")
+
+# b.
+pois_data <- rpois(100, lambda = 4)
+
+hist(pois_data, breaks = max(pois_data) - min(pois_data), col = "lightgreen", 
+     main = "Poisson Distribution (lambda=4)", xlab = "Values", ylab = "Frequency")
+
+# c.
+norm_data <- rnorm(100, mean = 50, sd = 4)
+
+par(mfrow = c(2, 1))
+plot(density(norm_data), col = "blue", main = "Normal Distribution (mean=50, sd=4)",
+     xlab = "Values", ylab = "Density")
+
+plot(ecdf(norm_data), main = "Cumulative Distribution Function",
+     xlab = "Values", ylab = "Cumulative Probability", col = "red")
+par(mfrow = c(1, 1))
+
+# d.
+exp_data <- rexp(100, rate = 1/25)
+
+# Plot density function
+par(mfrow = c(2, 1))
+plot(density(exp_data), col = "purple", main = "Exponential Distribution (lambda=1/25)",
+     xlab = "Values", ylab = "Density")
+
+# Plot cumulative distribution function
+plot(ecdf(exp_data), main = "Cumulative Distribution Function",
+     xlab = "Values", ylab = "Cumulative Probability", col = "red")
+par(mfrow = c(1, 1))
+
+#Bai4:
+# a. 
+diesel_engine <- read.table("C:/Users/kkagi/Downloads/diesel_engine.dat", header = TRUE)
+diesel_time <- read.csv("C:/Users/kkagi/Downloads/diesel_time.csv")
+
+# b. 
+cat("Variables in diesel_engine:", names(diesel_engine), "\n")
+cat("Variables in diesel_time:", names(diesel_time), "\n")
+
+# c. 
+missing_count <- colSums(is.na(diesel_engine))
+print(paste("Missing data count:", missing_count))
+
+# 
+diesel_engine$speed[is.na(diesel_engine$speed)] <- 1500
+diesel_engine$load[is.na(diesel_engine$load)] <- 20
+
+# d. 
+alcohol_stats <- c(
+  Mean = mean(diesel_engine$alcohol, na.rm = TRUE),
+  Variance = var(diesel_engine$alcohol, na.rm = TRUE),
+  SD = sd(diesel_engine$alcohol, na.rm = TRUE),
+  Min = min(diesel_engine$alcohol, na.rm = TRUE),
+  Max = max(diesel_engine$alcohol, na.rm = TRUE)
+)
+print(alcohol_stats)
+
+# e. 
+diesel <- merge(diesel_engine, diesel_time, by.x = "run", by.y = "X")
+
+# f. 
+low_delay_runs <- diesel$run[diesel$delay < 1.000]
+print(paste("Engines with delay < 1.000:", low_delay_runs))
+
+# g. 
+timing_30_count <- sum(diesel$timing == 30)
+print(paste("Number of engines with timing = 30:", timing_30_count))
+
+# h.
+par(mfrow = c(1, 3))
+boxplot(diesel$speed, main = "Speed", col = "lightblue")
+boxplot(diesel$timing, main = "Timing", col = "lightgreen")
+boxplot(diesel$delay, main = "Delay", col = "lightpink")
+par(mfrow = c(1, 1))
+
+# i.
+par(mfrow = c(1, 2))
+plot(diesel$timing, diesel$speed, main = "Timing vs Speed",
+     xlab = "Timing", ylab = "Speed", col = "blue", pch = 16)
+plot(diesel$temp, diesel$press, main = "Temperature vs Pressure",
+     xlab = "Temperature", ylab = "Pressure", col = "red", pch = 16)
+par(mfrow = c(1, 1))
+
+# j.
+diesel$load_factor <- factor(diesel$load)
+print(levels(diesel$load_factor))
+
+# k. 
+delay_breaks <- seq(min(diesel$delay), max(diesel$delay), length.out = 5)
+delay_categories <- cut(diesel$delay, breaks = delay_breaks)
+delay_counts <- table(delay_categories)
+print(delay_counts)
+
+barplot(delay_counts, main = "Delay Distribution (Equal Intervals)",
+        xlab = "Delay Range", ylab = "Frequency", col = "steelblue")
+
+# l.
+custom_breaks <- c(0.283, 0.7, 0.95, 1.2, 1.56)
+custom_categories <- cut(diesel$delay, breaks = custom_breaks)
+custom_counts <- table(custom_categories)
+print(custom_counts)
+
+barplot(custom_counts, main = "Delay Distribution (Custom Intervals)",
+        xlab = "Delay Range", ylab = "Frequency", col = "tomato")

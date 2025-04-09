@@ -1,0 +1,19 @@
+LƯU Ý:
+- Bài 1 và bài 2: TỰ VIẾT HÀM PDF và CDF. Và kiểm tra kết quả của câu a và b với kết quả khi sử dụng hàm có sẵn trong R.
+- Bài 3 và bài 4: SỬ DỤNG HÀM CÓ SẴN TRONG R
+Bài 1: 
+Ở một tổng đài điện thọai các cuộc gọi đến một cách ngẫu nhiên, độc lập và trung bình có khoảng 10 cuộc gọi trong một phút. Giả sử số cuộc gọi đến tổng đài trong một phút có phân phối Poisson, tìm xác suất để:
+a) Có đúng 5 cuộc gọi đến trong một phút.
+b) Có ít nhất 2 cuộc gọi trong một phút.
+
+Bài 2: 
+a) Vẽ một biểu đồ cột của hàm xác suất của phân phối siêu bội H(N,M,n) với N = 100, M = 25 và cỡ mẫu n = 15.
+b) Tính P(5 ≤ X ≤ 12).
+
+Bài 3: 
+- Mô phỏng một mẫu ngẫu nhiên cỡ 10 của phân phối Poisson P(2).
+- Mô phỏng một mẫu ngẫu nhiên cỡ 15 của phân phối chuẩn với mu = 2, sd = 0.12 .
+
+Bài 4: Chia cửa sổ đồ thị thành hai phần trên và dưới.- Trong phần trên, vẽ đồ thị của hàm xác suất của biến X ~ Binom(50,0.08) lấy ylim=c(0,0.25).
+- Trong phần dưới, vẽ đồ thị của hàm xác suất của biến X ~ Poisson(4) với x thuộc {0, ,50} với cùng lựa chọn: ylim=c(0,0.25).
+ (Điều này minh họa kết quả là khi n đủ lớn và np đủ nhỏ ta có thể xấp xỉ phân phối nhị thức B(n, p) bằng luật Poisson P(np).
